@@ -1,18 +1,30 @@
-import { Box, Container, Divider, Grid, Text } from '@chakra-ui/react'
-import { GoogleLogin } from '@react-oauth/google'
+import {
+  Box,
+  Container,
+  Divider,
+  Grid,
+  HStack,
+  Spinner,
+  Text,
+} from '@chakra-ui/react'
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 import { graphql } from '@/lib/gql'
-import { useQuery } from 'urql'
+import { useMutation } from 'urql'
 
-const HomePageQuery = graphql(/* GraphQL */ `
-  query HomePage {
-    greetings
+const VerifyIdToken = graphql(/* GraphQL */ `
+  mutation VerifyIdToken($idToken: String!) {
+    verifyIdToken(idToken: $idToken)
   }
 `)
 
 export default function Home() {
-  const [{ data, fetching }] = useQuery({
-    query: HomePageQuery,
-  })
+  const [{ fetching, data }, verifyIdToken] = useMutation(VerifyIdToken)
+
+  const onSignIn = async (credentialResponse: CredentialResponse) => {
+    if (!credentialResponse.credential) return
+
+    await verifyIdToken({ idToken: credentialResponse.credential })
+  }
 
   return (
     <Container as={Grid} gap={4} py={8}>
@@ -22,30 +34,23 @@ export default function Home() {
 
       <Divider />
 
-      <Grid gap={2}>
-        <Text fontWeight={'semibold'} color={'gray.600'}>
-          Query Result
-        </Text>
-        <Box bg={'gray.200'} py={2} px={3} mt={2} rounded={'md'}>
-          <Text>{fetching ? 'loading...' : data?.greetings}</Text>
-        </Box>
-      </Grid>
-
-      <Divider />
-
-      <Grid gap={2}>
+      <HStack>
         <Text fontWeight={'semibold'} color={'gray.600'}>
           Sign In With Google
         </Text>
-        <GoogleLogin
-          onSuccess={() => {
-            alert('Login Success')
-          }}
-          onError={() => {
-            alert('Login Failed')
-          }}
-        />
-      </Grid>
+        {fetching && <Spinner size={'xs'} />}
+      </HStack>
+      <GoogleLogin
+        onSuccess={onSignIn}
+        onError={() => {
+          alert('Login Failed')
+        }}
+      />
+      {data && (
+        <Grid gap={2} bg={'gray.200'} py={2} px={3} rounded={'md'}>
+          <Text fontSize={'sm'}>Logged In As : {data.verifyIdToken}</Text>
+        </Grid>
+      )}
     </Container>
   )
 }

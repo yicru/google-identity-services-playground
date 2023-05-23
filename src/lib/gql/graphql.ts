@@ -14,15 +14,27 @@ export type Scalars = {
   Float: number;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  verifyIdToken?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationVerifyIdTokenArgs = {
+  idToken: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   greetings?: Maybe<Scalars['String']>;
 };
 
-export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
+export type VerifyIdTokenMutationVariables = Exact<{
+  idToken: Scalars['String'];
+}>;
 
 
-export type HomePageQuery = { __typename?: 'Query', greetings?: string | null };
+export type VerifyIdTokenMutation = { __typename?: 'Mutation', verifyIdToken?: string | null };
 
 
-export const HomePageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"greetings"}}]}}]} as unknown as DocumentNode<HomePageQuery, HomePageQueryVariables>;
+export const VerifyIdTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"VerifyIdToken"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"idToken"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"verifyIdToken"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"idToken"},"value":{"kind":"Variable","name":{"kind":"Name","value":"idToken"}}}]}]}}]} as unknown as DocumentNode<VerifyIdTokenMutation, VerifyIdTokenMutationVariables>;
