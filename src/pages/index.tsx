@@ -1,7 +1,9 @@
+import { Center, Text } from '@chakra-ui/react'
+
 export default function Home() {
   return (
-    <div>
-      <p>Hello World</p>
-    </div>
+    <Center>
+      <Text>Hello Chakra</Text>
+    </Center>
   )
 }
