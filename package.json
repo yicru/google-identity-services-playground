@@ -23,6 +23,7 @@
     "eslint-config-next": "13.4.3",
     "framer-motion": "^10.12.12",
     "google-auth-library": "^8.8.0",
+    "googleapis": "^118.0.0",
     "graphql": "^16.6.0",
     "graphql-yoga": "^3.9.1",
     "next": "13.4.3",

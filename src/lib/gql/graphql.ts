@@ -16,7 +16,13 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  getTokenByCode?: Maybe<Scalars['String']>;
   verifyIdToken?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationGetTokenByCodeArgs = {
+  code: Scalars['String'];
 };
 
 
@@ -29,6 +35,13 @@ export type Query = {
   greetings?: Maybe<Scalars['String']>;
 };
 
+export type GetTokenByCodeMutationVariables = Exact<{
+  code: Scalars['String'];
+}>;
+
+
+export type GetTokenByCodeMutation = { __typename?: 'Mutation', getTokenByCode?: string | null };
+
 export type VerifyIdTokenMutationVariables = Exact<{
   idToken: Scalars['String'];
 }>;
@@ -37,4 +50,5 @@ export type VerifyIdTokenMutationVariables = Exact<{
 export type VerifyIdTokenMutation = { __typename?: 'Mutation', verifyIdToken?: string | null };
 
 
+export const GetTokenByCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GetTokenByCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTokenByCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}}]}]}}]} as unknown as DocumentNode<GetTokenByCodeMutation, GetTokenByCodeMutationVariables>;
 export const VerifyIdTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"VerifyIdToken"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"idToken"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"verifyIdToken"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"idToken"},"value":{"kind":"Variable","name":{"kind":"Name","value":"idToken"}}}]}]}}]} as unknown as DocumentNode<VerifyIdTokenMutation, VerifyIdTokenMutationVariables>;

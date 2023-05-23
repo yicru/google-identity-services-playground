@@ -1,5 +1,6 @@
 import { Container, Divider, Grid, Text } from '@chakra-ui/react'
 import { SignInWithGoogleFlow } from '@/components/SignInWithGoogleFlow'
+import { OAuth2Flow } from '@/components/OAuth2Flow'
 
 export default function Home() {
   return (
@@ -14,6 +15,13 @@ export default function Home() {
         Sign In With Google Flow
       </Text>
       <SignInWithGoogleFlow />
+
+      <Divider />
+
+      <Text fontWeight={'semibold'} color={'gray.600'}>
+        OAuth2 Flow
+      </Text>
+      <OAuth2Flow />
     </Container>
   )
 }
